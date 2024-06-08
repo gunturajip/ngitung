@@ -2,17 +2,17 @@ import { SITE } from "@config";
 import getPageNumbers from "./getPageNumbers";
 
 interface GetPaginationProps<T> {
-  posts: T;
+  studies: T;
   page: string | number;
   isIndex?: boolean;
 }
 
 const getPagination = <T>({
-  posts,
+  studies,
   page,
   isIndex = false,
 }: GetPaginationProps<T[]>) => {
-  const totalPagesArray = getPageNumbers(posts.length);
+  const totalPagesArray = getPageNumbers(studies.length);
   const totalPages = totalPagesArray.length;
 
   const currentPage = isIndex
@@ -21,14 +21,14 @@ const getPagination = <T>({
       ? Number(page)
       : 0;
 
-  const lastPost = isIndex ? SITE.postPerPage : currentPage * SITE.postPerPage;
-  const startPost = isIndex ? 0 : lastPost - SITE.postPerPage;
-  const paginatedPosts = posts.slice(startPost, lastPost);
+  const lastStudy = isIndex ? SITE.studyPerPage : currentPage * SITE.studyPerPage;
+  const startStudy = isIndex ? 0 : lastStudy - SITE.studyPerPage;
+  const paginatedStudies = studies.slice(startStudy, lastStudy);
 
   return {
     totalPages,
     currentPage,
-    paginatedPosts,
+    paginatedStudies,
   };
 };
 

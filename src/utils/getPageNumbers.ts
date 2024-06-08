@@ -1,7 +1,7 @@
 import { SITE } from "@config";
 
-const getPageNumbers = (numberOfPosts: number) => {
-  const numberOfPages = numberOfPosts / Number(SITE.postPerPage);
+const getPageNumbers = (numberOfStudies: number) => {
+  const numberOfPages = numberOfStudies / Number(SITE.studyPerPage);
 
   let pageNumbers: number[] = [];
   for (let i = 1; i <= Math.ceil(numberOfPages); i++) {

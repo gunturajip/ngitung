@@ -1,0 +1,41 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Studies from "@layouts/Studies.astro";
+import StudyDetails from "@layouts/StudyDetails.astro";
+import getSortedStudies from "@utils/getSortedStudies";
+import getPageNumbers from "@utils/getPageNumbers";
+import getPagination from "@utils/getPagination";
+
+export interface Props {
+  study: CollectionEntry<"blog">;
+}
+
+export async function getStaticPaths() {
+  const studies = await getCollection("blog", ({ data }) => !data.draft);
+
+  const studyResult = studies.map(study => ({
+    params: { slug: study.slug },
+    props: { study },
+  }));
+
+  const pagePaths = getPageNumbers(studies.length).map(pageNum => ({
+    params: { slug: String(pageNum) },
+  }));
+
+  return [...studyResult, ...pagePaths];
+}
+
+const { slug } = Astro.params;
+const { study } = Astro.props;
+
+const studies = await getCollection("blog");
+
+const sortedStudies = getSortedStudies(studies);
+
+const pagination = getPagination({
+  studies: sortedStudies,
+  page: slug,
+});
+---
+
+{study ? <StudyDetails study={study} /> : <Studies {...pagination} />}

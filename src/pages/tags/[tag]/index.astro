@@ -1,32 +1,32 @@
 ---
 import { getCollection } from "astro:content";
-import TagPosts from "@layouts/TagPosts.astro";
-import getPostsByTag from "@utils/getPostsByTag";
+import TagStudies from "@layouts/TagStudies.astro";
+import getStudiesByTag from "@utils/getStudiesByTag";
 import getPagination from "@utils/getPagination";
 import getUniqueTags from "@utils/getUniqueTags";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const studies = await getCollection("blog");
 
-  const tags = getUniqueTags(posts);
+  const tags = getUniqueTags(studies);
 
   return tags.map(({ tag, tagName }) => {
     return {
       params: { tag },
-      props: { tag, tagName, posts },
+      props: { tag, tagName, studies },
     };
   });
 }
 
-const { tag, tagName, posts } = Astro.props;
+const { tag, tagName, studies } = Astro.props;
 
-const postsByTag = getPostsByTag(posts, tag);
+const studiesByTag = getStudiesByTag(studies, tag);
 
 const pagination = getPagination({
-  posts: postsByTag,
+  studies: studiesByTag,
   page: 1,
   isIndex: true,
 });
 ---
 
-<TagPosts {...pagination} {tag} {tagName} />
+<TagStudies {...pagination} {tag} {tagName} />

@@ -10,10 +10,10 @@ import ShareLinks from "@components/ShareLinks.astro";
 import { SITE } from "@config";
 
 export interface Props {
-  post: CollectionEntry<"blog">;
+  study: CollectionEntry<"blog">;
 }
 
-const { post } = Astro.props;
+const { study } = Astro.props;
 
 const {
   title,
@@ -24,13 +24,13 @@ const {
   pubDatetime,
   modDatetime,
   tags,
-} = post.data;
+} = study.data;
 
-const { Content } = await post.render();
+const { Content } = await study.render();
 
 const ogImageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src;
 const ogUrl = new URL(
-  ogImageUrl ?? `/posts/${slugifyStr(title)}.png`,
+  ogImageUrl ?? `/studies/${slugifyStr(title)}.png`,
   Astro.url.origin
 ).href;
 
@@ -66,7 +66,7 @@ const layoutProps = {
     </button>
   </div>
   <main id="main-content">
-    <h1 transition:name={slugifyStr(title)} class="post-title">{title}</h1>
+    <h1 transition:name={slugifyStr(title)} class="study-title">{title}</h1>
     <Datetime
       pubDatetime={pubDatetime}
       modDatetime={modDatetime}
@@ -106,7 +106,7 @@ const layoutProps = {
   main {
     @apply mx-auto w-full max-w-3xl px-4 pb-12;
   }
-  .post-title {
+  .study-title {
     @apply text-2xl font-semibold text-skin-accent;
   }
 </style>

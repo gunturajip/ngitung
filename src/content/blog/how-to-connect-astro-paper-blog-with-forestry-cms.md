@@ -75,7 +75,7 @@ Then, configure the directory section. You can follow along with my setup.
 
 ![Configuring the Directory Section](https://res.cloudinary.com/noezectz/v1663741105/astro-paper/forestry-io_7_jkwgi1.png)
 
-After this step, you should see a sidebar menu "Blog Posts" and some blog posts.
+After this step, you should see a sidebar menu "Blog Studies" and some blog studies.
 
 ## Set up Media Import
 
@@ -87,7 +87,7 @@ You can see details of Forestry Cloudinary setup at [Forestry documentation](htt
 
 ## Set up Front matter template
 
-After setting everything up, you can set up front matter template for your future blog post. To set up front matter template, navigate to "Front matter" menu on the sidebar.
+After setting everything up, you can set up front matter template for your future blog study. To set up front matter template, navigate to "Front matter" menu on the sidebar.
 
 Then, click "Add Template" button at the top right corner.
 
@@ -123,4 +123,4 @@ Here are some adjustments you have to make.
 
 ## Conclusion
 
-You can now post your articles and write whatever you want.
+You can now study your articles and write whatever you want.

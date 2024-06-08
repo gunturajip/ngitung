@@ -12,7 +12,7 @@ description:
   of AstroPaper theme.
 ---
 
-This post will explain how you can enable/disable light & dark mode for the website. Moreover, you'll learn how you can customize color schemes of the entire website.
+This study will explain how you can enable/disable light & dark mode for the website. Moreover, you'll learn how you can customize color schemes of the entire website.
 
 ## Table of contents
 
@@ -29,7 +29,7 @@ export const SITE = {
   title: "AstroPaper",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true, // true by default
-  postPerPage: 3,
+  studyPerPage: 3,
 };
 ```
 
@@ -129,4 +129,4 @@ Here is an example of changing the light color scheme.
 }
 ```
 
-> Check out some [predefined color schemes](https://astro-paper.pages.dev/posts/predefined-color-schemes/) AstroPaper has already crafted for you.
+> Check out some [predefined color schemes](https://astro-paper.pages.dev/studies/predefined-color-schemes/) AstroPaper has already crafted for you.

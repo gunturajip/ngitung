@@ -7,8 +7,8 @@ export type Site = {
   title: string;
   ogImage?: string;
   lightAndDarkMode: boolean;
-  postPerPage: number;
-  scheduledPostMargin: number;
+  studyPerPage: number;
+  scheduledStudyMargin: number;
 };
 
 export type SocialObjects = {

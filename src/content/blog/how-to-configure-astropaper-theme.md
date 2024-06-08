@@ -31,8 +31,8 @@ export const SITE = {
   title: "AstroPaper",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
-  postPerPage: 3,
-  scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
+  studyPerPage: 3,
+  scheduledStudyMargin: 15 * 60 * 1000, // 15 minutes
 };
 ```
 
@@ -46,12 +46,12 @@ Here are SITE configuration options
 | `title`               | Your site name                                                                                                                                                                                                                                      |
 | `ogImage`             | Your default OG image for the site. Useful for social media sharing. OG images can be an external image url or they can be placed under `/public` directory.                                                                                        |
 | `lightAndDarkMode`    | Enable or disable `light & dark mode` for the website. If disabled, primary color scheme will be used. This option is enabled by default.                                                                                                           |
-| `postPerPage`         | You can specify how many posts will be displayed in each posts page. (eg: if you set SITE.postPerPage to 3, each page will only show 3 posts per page)                                                                                              |
-| `scheduledPostMargin` | In Production mode, posts with a future `pubDatetime` will not be visible. However, if a post's `pubDatetime` is within the next 15 minutes, it will be visible. You can set `scheduledPostMargin` if you don't like the default 15 minutes margin. |
+| `studyPerPage`         | You can specify how many studies will be displayed in each studies page. (eg: if you set SITE.studyPerPage to 3, each page will only show 3 studies per page)                                                                                              |
+| `scheduledStudyMargin` | In Production mode, studies with a future `pubDatetime` will not be visible. However, if a study's `pubDatetime` is within the next 15 minutes, it will be visible. You can set `scheduledStudyMargin` if you don't like the default 15 minutes margin. |
 
 ## Configuring locale
 
-You can configure the default locale used for the build (e.g., date format in the post page), and for the rendering in browsers (e.g., date format in the search page)
+You can configure the default locale used for the build (e.g., date format in the study page), and for the rendering in browsers (e.g., date format in the search page)
 
 ```js
 // file: src/config.ts
@@ -157,4 +157,4 @@ linkTitle: `Follow ${SITE.title} on Twitter`;
 
 ## Conclusion
 
-This is the brief specification of how you can customize this theme. You can customize more if you know some coding. For customizing styles, please read [this article](https://astro-paper.pages.dev/posts/customizing-astropaper-theme-color-schemes/). Thanks for reading.✌🏻
+This is the brief specification of how you can customize this theme. You can customize more if you know some coding. For customizing styles, please read [this article](https://astro-paper.pages.dev/studies/customizing-astropaper-theme-color-schemes/). Thanks for reading.✌🏻

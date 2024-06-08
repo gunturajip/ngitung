@@ -1,7 +1,7 @@
 import satori, { type SatoriOptions } from "satori";
 import { Resvg } from "@resvg/resvg-js";
 import { type CollectionEntry } from "astro:content";
-import postOgImage from "./og-templates/post";
+import studyOgImage from "./og-templates/study";
 import siteOgImage from "./og-templates/site";
 
 const fetchFonts = async () => {
@@ -48,8 +48,8 @@ function svgBufferToPngBuffer(svg: string) {
   return pngData.asPng();
 }
 
-export async function generateOgImageForPost(post: CollectionEntry<"blog">) {
-  const svg = await satori(postOgImage(post), options);
+export async function generateOgImageForStudy(study: CollectionEntry<"blog">) {
+  const svg = await satori(studyOgImage(study), options);
   return svgBufferToPngBuffer(svg);
 }
 

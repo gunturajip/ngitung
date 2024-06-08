@@ -8,14 +8,14 @@ featured: false
 draft: false
 tags:
   - FAQ
-description: How you can add an 'Estimated Reading time' in your blog posts of AstroPaper.
+description: How you can add an 'Estimated Reading time' in your blog studies of AstroPaper.
 ---
 
-As the [Astro docs](https://docs.astro.build/en/recipes/reading-time/) say, we can use remark plugin to add a reading time property in our frontmatter. However, for some reason, we can't add this feature by following what stated in Astro docs. Therefore, to achieve this, we have to tweak a little bit. This post will demonstrate how we can do that.
+As the [Astro docs](https://docs.astro.build/en/recipes/reading-time/) say, we can use remark plugin to add a reading time property in our frontmatter. However, for some reason, we can't add this feature by following what stated in Astro docs. Therefore, to achieve this, we have to tweak a little bit. This study will demonstrate how we can do that.
 
 ## Table of contents
 
-## Add reading time in PostDetails
+## Add reading time in StudyDetails
 
 Step (1) Install required dependencies.
 
@@ -85,7 +85,7 @@ const blog = defineCollection({
 export const collections = { blog };
 ```
 
-Step (5) Create a new file called `getPostsWithRT.ts` under `src/utils` directory.
+Step (5) Create a new file called `getStudiesWithRT.ts` under `src/utils` directory.
 
 ```ts
 import type { MarkdownInstance } from "astro";
@@ -93,17 +93,17 @@ import type { CollectionEntry } from "astro:content";
 import { slugifyStr } from "./slugify";
 
 export const getReadingTime = async () => {
-  // Get all posts using glob. This is to get the updated frontmatter
-  const globPosts = import.meta.glob("../content/blog/*.md") as Promise<
+  // Get all studies using glob. This is to get the updated frontmatter
+  const globStudies = import.meta.glob("../content/blog/*.md") as Promise<
     CollectionEntry<"blog">["data"][]
   >;
 
   // Then, set those frontmatter value in a JS Map with key value pair
   const mapFrontmatter = new Map();
-  const globPostsValues = Object.values(globPosts);
+  const globStudiesValues = Object.values(globStudies);
   await Promise.all(
-    globPostsValues.map(async globPost => {
-      const { frontmatter } = await globPost();
+    globStudiesValues.map(async globStudy => {
+      const { frontmatter } = await globStudy();
       mapFrontmatter.set(
         slugifyStr(frontmatter.title),
         frontmatter.readingTime
@@ -114,52 +114,52 @@ export const getReadingTime = async () => {
   return mapFrontmatter;
 };
 
-const getPostsWithRT = async (posts: CollectionEntry<"blog">[]) => {
+const getStudiesWithRT = async (studies: CollectionEntry<"blog">[]) => {
   const mapFrontmatter = await getReadingTime();
-  return posts.map(post => {
-    post.data.readingTime = mapFrontmatter.get(slugifyStr(post.data.title));
-    return post;
+  return studies.map(study => {
+    study.data.readingTime = mapFrontmatter.get(slugifyStr(study.data.title));
+    return study;
   });
 };
 
-export default getPostsWithRT;
+export default getStudiesWithRT;
 ```
 
-Step (6) Refactor `getStaticPaths` of `/src/pages/posts/[slug].astro` as the following
+Step (6) Refactor `getStaticPaths` of `/src/pages/studies/[slug].astro` as the following
 
 ```ts
 ---
 // other imports
-import getPostsWithRT from "@utils/getPostsWithRT";
+import getStudiesWithRT from "@utils/getStudiesWithRT";
 
 export interface Props {
-  post: CollectionEntry<"blog">;
+  study: CollectionEntry<"blog">;
 }
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  const studies = await getCollection("blog", ({ data }) => !data.draft);
 
-  const postsWithRT = await getPostsWithRT(posts); // replace reading time logic with this func
+  const studiesWithRT = await getStudiesWithRT(studies); // replace reading time logic with this func
 
-   const postResult = postsWithRT.map(post => ({ // make sure to replace posts with postsWithRT
-    params: { slug: post.slug },
-    props: { post },
+   const studyResult = studiesWithRT.map(study => ({ // make sure to replace studies with studiesWithRT
+    params: { slug: study.slug },
+    props: { study },
   }));
 
 // other codes
 ```
 
-Step (7) Refactor `PostDetails.astro` like this. Now you can access and display `readingTime` in `PostDetails.astro`
+Step (7) Refactor `StudyDetails.astro` like this. Now you can access and display `readingTime` in `StudyDetails.astro`
 
 ```ts
 ---
 // imports
 
 export interface Props {
-  post: CollectionEntry<"blog">;
+  study: CollectionEntry<"blog">;
 }
 
-const { post } = Astro.props;
+const { study } = Astro.props;
 
 const {
   title,
@@ -169,26 +169,26 @@ const {
   readingTime, // we can now directly access readingTime from frontmatter
   pubDatetime,
   modDatetime,
-  tags } = post.data;
+  tags } = study.data;
 
 // other codes
 ---
 ```
 
-## Access reading time outside of PostDetails (optional)
+## Access reading time outside of StudyDetails (optional)
 
-By following the previous steps, you can now access `readingTime` frontmatter property in you post details page. Sometimes, this is exactly what you want. If so, you can skip to the next section. However, if you want to display "estimated reading time" in index, posts, and technically everywhere, you need to do the following extra steps.
+By following the previous steps, you can now access `readingTime` frontmatter property in you study details page. Sometimes, this is exactly what you want. If so, you can skip to the next section. However, if you want to display "estimated reading time" in index, studies, and technically everywhere, you need to do the following extra steps.
 
-Step (1) Update `utils/getSortedPosts.ts` as the following
+Step (1) Update `utils/getSortedStudies.ts` as the following
 
 ```ts
 import type { CollectionEntry } from "astro:content";
-import getPostsWithRT from "./getPostsWithRT";
+import getStudiesWithRT from "./getStudiesWithRT";
 
-const getSortedPosts = async (posts: CollectionEntry<"blog">[]) => {
+const getSortedStudies = async (studies: CollectionEntry<"blog">[]) => {
   // make sure that this func is async
-  const postsWithRT = await getPostsWithRT(posts); // add reading time
-  return postsWithRT
+  const studiesWithRT = await getStudiesWithRT(studies); // add reading time
+  return studiesWithRT
     .filter(({ data }) => !data.draft)
     .sort(
       (a, b) =>
@@ -201,32 +201,32 @@ const getSortedPosts = async (posts: CollectionEntry<"blog">[]) => {
     );
 };
 
-export default getSortedPosts;
+export default getSortedStudies;
 ```
 
-Step (2) Make sure to refactor every file which uses `getSortedPosts` function. You can simply add `await` keyword in front of `getSortedPosts` function.
+Step (2) Make sure to refactor every file which uses `getSortedStudies` function. You can simply add `await` keyword in front of `getSortedStudies` function.
 
-Files that use `getSortedPosts` function are as follow
+Files that use `getSortedStudies` function are as follow
 
 - src/pages/index.astro
-- src/pages/posts/index.astro
+- src/pages/studies/index.astro
 - src/pages/rss.xml.ts
-- src/pages/posts/index.astro
-- src/pages/posts/[slug].astro
-- src/utils/getPostsByTag.ts
+- src/pages/studies/index.astro
+- src/pages/studies/[slug].astro
+- src/utils/getStudiesByTag.ts
 
 All you have to do is like this
 
 ```ts
-const sortedPosts = getSortedPosts(posts); // old code ❌
-const sortedPosts = await getSortedPosts(posts); // new code ✅
+const sortedStudies= getSortedStudies(studies); // old code ❌
+const sortedStudies = await getSortedStudies(studies); // new code ✅
 ```
 
-Now you can access `readingTime` in other places besides `PostDetails`
+Now you can access `readingTime` in other places besides `StudyDetails`
 
 ## Displaying reading time (optional)
 
-Since you can now access `readingTime` in your post details (or everywhere if you do the above section), it's up to you to display `readingTime` wherever you want.
+Since you can now access `readingTime` in your study details (or everywhere if you do the above section), it's up to you to display `readingTime` wherever you want.
 
 But in this section, I'm gonna show you how I would display `readingTime` in my components. This is optional. You can ignore this section if you want.
 
@@ -278,12 +278,12 @@ export default function Card({ href, frontmatter, secHeading = true }: Props) {
 }
 ```
 
-file: PostDetails.tsx
+file: StudyDetails.tsx
 
 ```jsx
 // Other Codes
 <main id="main-content">
-  <h1 class="post-title">{title}</h1>
+  <h1 class="study-title">{title}</h1>
   <Datetime
     pubDatetime={pubDatetime}
     modDatetime={modDatetime}
@@ -298,6 +298,6 @@ file: PostDetails.tsx
 
 ## Conclusion
 
-By following the provided steps and tweaks, you can now incorporate this useful feature into your content. I hope this post helps you adding `readingTime` in your blog. AstroPaper might include reading time by default in future releases. 🤷🏻‍♂️
+By following the provided steps and tweaks, you can now incorporate this useful feature into your content. I hope this study helps you adding `readingTime` in your blog. AstroPaper might include reading time by default in future releases. 🤷🏻‍♂️
 
 Kyay Zuu for Reading 🙏🏻

@@ -29,13 +29,13 @@ AstroPaper now fully supports [Astro v3](https://astro.build/blog/astro-3/), off
 
 Besides, we've added support for Astro's [ViewTransitions API](https://docs.astro.build/en/guides/view-transitions/), allowing you to create captivating and dynamic transitions between views.
 
-In the "Recent Section", only non-featured posts will be displayed to avoid duplications and better support for ViewTransitions API.
+In the "Recent Section", only non-featured studies will be displayed to avoid duplications and better support for ViewTransitions API.
 
 ### Update OG Image Generation Logic
 
 ![Example OG Image](https://user-images.githubusercontent.com/40914272/269252964-a0dc6735-80f7-41ed-8e74-4d4d70f96891.png)
 
-We've updated the logic for automatic OG image generation, making it even more reliable and efficient. Besides, it now supports special characters in post titles, ensuring accurate, flexible and eye-catching social media previews.
+We've updated the logic for automatic OG image generation, making it even more reliable and efficient. Besides, it now supports special characters in study titles, ensuring accurate, flexible and eye-catching social media previews.
 
 `SITE.ogImage` is now optional. If it is not specified, AstroPaper will automatically generate an OG image using `SITE.title`, `SITE.desc` and `SITE.website`
 
@@ -75,7 +75,7 @@ Update nav style CSS to allow adding more nav links to the navigation.
 
 This section will help you migrate from AstroPaper v2 to AstroPaper v3.
 
-Before reading the rest of the section, you might also want to check [this article](https://astro-paper.pages.dev/posts/how-to-update-dependencies/) for upgrading dependencies and AstroPaper.
+Before reading the rest of the section, you might also want to check [this article](https://astro-paper.pages.dev/studies/how-to-update-dependencies/) for upgrading dependencies and AstroPaper.
 
 ## Option 1: Fresh Restart (recommended)
 
@@ -162,7 +162,7 @@ export interface Props {
 
 This approach is not recommended for most users. You should do the "Option 1" if you can. Only do this if you know how to resolve merge conflicts and you know what you're doing.
 
-Actually, I've already written a blog post for this case and you can check out [here](https://astro-paper.pages.dev/posts/how-to-update-dependencies/#updating-astropaper-using-git).
+Actually, I've already written a blog study for this case and you can check out [here](https://astro-paper.pages.dev/studies/how-to-update-dependencies/#updating-astropaper-using-git).
 
 ## Outro
 
