@@ -89,7 +89,7 @@ It's important to keep all the files which have been already updated. These file
 - `/src/styles/base.css` (minor changes in v3; mentioned below)
 - `/src/assets/` (didn't touch in v3)
 - `/public/assets/` (didn't touch in v3)
-- `/content/blog/` (it's your blog content directory 🤷🏻‍♂️)
+- `/content/studies/` (it's your studies content directory 🤷🏻‍♂️)
 - Any other customizations you've made.
 
 ```css

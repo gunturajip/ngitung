@@ -1,7 +1,7 @@
 import { SITE } from "@config";
 import type { CollectionEntry } from "astro:content";
 
-export default (study: CollectionEntry<"blog">) => {
+export default (study: CollectionEntry<"studies">) => {
   return (
     <div
       style={{

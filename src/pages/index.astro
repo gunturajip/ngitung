@@ -10,7 +10,7 @@ import Socials from "@components/Socials.astro";
 import getSortedStudies from "@utils/getSortedStudies";
 import { SOCIALS } from "@config";
 
-const studies = await getCollection("blog");
+const studies = await getCollection("studies");
 
 const sortedStudies = getSortedStudies(studies);
 const featuredStudies = sortedStudies.filter(({ data }) => data.featured);

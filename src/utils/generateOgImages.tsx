@@ -48,7 +48,7 @@ function svgBufferToPngBuffer(svg: string) {
   return pngData.asPng();
 }
 
-export async function generateOgImageForStudy(study: CollectionEntry<"blog">) {
+export async function generateOgImageForStudy(study: CollectionEntry<"studies">) {
   const svg = await satori(studyOgImage(study), options);
   return svgBufferToPngBuffer(svg);
 }

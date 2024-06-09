@@ -4,7 +4,7 @@ import getSortedStudies from "@utils/getSortedStudies";
 import { SITE } from "@config";
 
 export async function GET() {
-  const studies = await getCollection("blog");
+  const studies = await getCollection("studies");
   const sortedStudies = getSortedStudies(studies);
   return rss({
     title: SITE.title,

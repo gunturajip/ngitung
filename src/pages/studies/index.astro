@@ -4,7 +4,7 @@ import Studies from "@layouts/Studies.astro";
 import getSortedStudies from "@utils/getSortedStudies";
 import getPagination from "@utils/getPagination";
 
-const studies = await getCollection("blog");
+const studies = await getCollection("studies");
 
 const sortedStudies = getSortedStudies(studies);
 

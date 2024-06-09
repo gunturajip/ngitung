@@ -1,7 +1,7 @@
 import type { CollectionEntry } from "astro:content";
 import studyFilter from "./studyFilter";
 
-const getSortedStudies = (studies: CollectionEntry<"blog">[]) => {
+const getSortedStudies = (studies: CollectionEntry<"studies">[]) => {
   return studies
     .filter(studyFilter)
     .sort(

@@ -9,7 +9,7 @@ import SearchBar from "@components/Search";
 import getSortedStudies from "@utils/getSortedStudies";
 
 // Retrieve all published articles
-const studies = await getCollection("blog", ({ data }) => !data.draft);
+const studies = await getCollection("studies", ({ data }) => !data.draft);
 const sortedStudies = getSortedStudies(studies);
 
 // List of items to search in

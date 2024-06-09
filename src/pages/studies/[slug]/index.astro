@@ -7,11 +7,11 @@ import getPageNumbers from "@utils/getPageNumbers";
 import getPagination from "@utils/getPagination";
 
 export interface Props {
-  study: CollectionEntry<"blog">;
+  study: CollectionEntry<"studies">;
 }
 
 export async function getStaticPaths() {
-  const studies = await getCollection("blog", ({ data }) => !data.draft);
+  const studies = await getCollection("studies", ({ data }) => !data.draft);
 
   const studyResult = studies.map(study => ({
     params: { slug: study.slug },
@@ -28,7 +28,7 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 const { study } = Astro.props;
 
-const studies = await getCollection("blog");
+const studies = await getCollection("studies");
 
 const sortedStudies = getSortedStudies(studies);
 
